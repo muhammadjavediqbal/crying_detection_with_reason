@@ -7,9 +7,9 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from schemas.schemas import VisionAnalysisResult, RuleBasedFusion, HeuristicAudioDetector, HeuristicVisionAnalyzer
-from core.core import db_conn, AUDIO_DIR, IMAGE_DIR
-from utils.utils import now_iso, save_upload
+from schemas import VisionAnalysisResult, RuleBasedFusion, HeuristicAudioDetector, HeuristicVisionAnalyzer
+from core import db_conn, AUDIO_DIR, IMAGE_DIR
+from utils import now_iso, save_upload
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("baby-mvp")
@@ -138,4 +138,5 @@ async def predict_reason(audio: UploadFile = File(...), image: Optional[UploadFi
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
